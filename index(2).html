@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quest Men Salon | Premium Grooming for Gentlemen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #d97706;
+      --primary-light: #fbbf24;
+      --secondary: #1f2937;
+      --dark: #0a0a0a;
+      --darker: #050505;
+      --light: #f9fafb;
+      --gray: #6b7280;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--darker);
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(217, 119, 6, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(217, 119, 6, 0.6); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 28px; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1.25rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 0.75rem 5%;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 45px; height: 45px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .logo-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 1px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .book-btn {
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .book-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+    }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 5% 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1920&h=1080&fit=crop') center/cover;
+      opacity: 0.4;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      animation: fadeInUp 0.8s ease;
+    }
+    .hero-tag {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: rgba(217, 119, 6, 0.2);
+      border: 1px solid var(--primary);
+      color: var(--primary-light);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+    .hero h1 span {
+      color: var(--primary);
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 1rem 2.5rem;
+      background: var(--primary);
+      border: none;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover {
+      background: var(--primary-light);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(217, 119, 6, 0.3);
+    }
+    .btn-outline {
+      padding: 1rem 2.5rem;
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-outline:hover {
+      background: white;
+      color: black;
+    }
+    
+    /* Stats */
+    .stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-number {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Services */
+    .services {
+      padding: 6rem 5%;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-header h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-header p {
+      color: rgba(255,255,255,0.6);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 2.5rem;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background: var(--primary);
+      transition: height 0.4s;
+    }
+    .service-card:hover::before {
+      height: 100%;
+    }
+    .service-card:hover {
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-5px);
+    }
+    .service-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .service-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .service-card p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .service-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    /* Why Choose Us */
+    .why-us {
+      padding: 6rem 5%;
+      background: rgba(255,255,255,0.02);
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .why-item {
+      text-align: center;
+      padding: 2rem;
+    }
+    .why-icon {
+      width: 70px;
+      height: 70px;
+      background: rgba(217, 119, 6, 0.1);
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1.5rem;
+    }
+    .why-item h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .why-item p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+    }
+    
+    /* Gallery */
+    .gallery {
+      padding: 6rem 5%;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(217, 119, 6, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+    .gallery-overlay span {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      padding: 6rem 5%;
+      background: rgba(255,255,255,0.02);
+    }
+    .testimonial-card {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 3rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .quote-icon {
+      font-size: 4rem;
+      color: var(--primary);
+      opacity: 0.3;
+      line-height: 1;
+    }
+    .testimonial-text {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      margin: 1.5rem 0;
+      color: rgba(255,255,255,0.9);
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .author-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+    }
+    .author-info h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+    }
+    .author-info p {
+      color: var(--primary);
+      font-size: 0.85rem;
+    }
+    
+    /* CTA */
+    .cta {
+      padding: 6rem 5%;
+      text-align: center;
+      position: relative;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(217, 119, 6, 0.1), transparent);
+    }
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+    .cta h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .cta p {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 2rem;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 4rem 5% 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats { flex-direction: column; gap: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Quest Ecosystem Navigation -->
+  <div class="quest-ecosystem" style="position:fixed;top:0;left:0;right:0;z-index:1001;background:linear-gradient(90deg,#d97706,#fbbf24);padding:0.4rem 5%;text-align:center;">
+    <span style="color:white;font-size:0.75rem;font-weight:500;">Part of the <a href="QuestBusiness_Complete.html" style="color:white;text-decoration:underline;font-weight:700;">Quest Business</a> Empire</span>
+    <span style="color:rgba(255,255,255,0.7);margin:0 0.5rem;">|</span>
+    <a href="quest-digital.html" style="color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.7rem;margin:0 0.3rem;">⚡ Digital</a>
+    <a href="index(5).html" style="color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.7rem;margin:0 0.3rem;">📚 Books</a>
+    <a href="index(4).html" style="color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.7rem;margin:0 0.3rem;">🤖 Chat</a>
+    <a href="index(3).html" style="color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.7rem;margin:0 0.3rem;">💄 Beauty</a>
+    <a href="index(1).html" style="color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.7rem;margin:0 0.3rem;">💪 Fitness</a>
+  </div>
+  <style>.quest-ecosystem a:hover{color:#fff!important;text-decoration:underline!important}</style>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#" class="logo">
+      <div class="logo-icon">💈</div>
+      <span class="logo-text">Quest Men</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <button class="book-btn">Book Now</button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-tag">Premium Men's Grooming</span>
+      <h1>Look <span>Sharp</span><br>Feel <span>Confident</span></h1>
+      <p>Experience the art of modern grooming at Quest Men Salon. Our master barbers deliver precision cuts, classic shaves, and premium treatments tailored for the modern gentleman.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary">Book Appointment</button>
+        <button class="btn-outline">Our Services</button>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number">10K+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Expert Barbers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">5★</div>
+          <div class="stat-label">Rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="section-header">
+      <h2>Our Services</h2>
+      <p>Premium grooming services for the modern man</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">✂️</div>
+        <h3>Haircut & Styling</h3>
+        <p>Precision cuts tailored to your face shape and personal style. Includes consultation, wash, and styling.</p>
+        <div class="service-price">From ₹399</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🪒</div>
+        <h3>Beard Grooming</h3>
+        <p>Expert beard shaping, trimming, and conditioning. Hot towel treatment included for the ultimate experience.</p>
+        <div class="service-price">From ₹299</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧴</div>
+        <h3>Facial Treatment</h3>
+        <p>Deep cleansing facials designed specifically for men's skin. Combat pollution and look refreshed.</p>
+        <div class="service-price">From ₹599</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💆</div>
+        <h3>Head Massage</h3>
+        <p>Relaxing head and scalp massage to relieve stress and promote healthy hair growth.</p>
+        <div class="service-price">From ₹249</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>Hair Coloring</h3>
+        <p>From natural grey coverage to trendy highlights. Premium ammonia-free colors used.</p>
+        <div class="service-price">From ₹899</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✨</div>
+        <h3>Bridal Package</h3>
+        <p>Complete grooming package for grooms. Hair, beard, facial, and more for your special day.</p>
+        <div class="service-price">From ₹2,999</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-us">
+    <div class="section-header">
+      <h2>Why Choose Quest</h2>
+      <p>What sets us apart from the rest</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">🏆</div>
+        <h3>Expert Barbers</h3>
+        <p>Trained professionals with years of experience</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">⏰</div>
+        <h3>On-Time Service</h3>
+        <p>We value your time, always punctual</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🧼</div>
+        <h3>Hygiene First</h3>
+        <p>Sanitized tools and clean environment</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">💎</div>
+        <h3>Premium Products</h3>
+        <p>Only the best brands for your hair & skin</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery" id="gallery">
+    <div class="section-header">
+      <h2>Our Work</h2>
+      <p>See the transformations we create</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=400&h=400&fit=crop" alt="Haircut">
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&h=400&fit=crop" alt="Beard">
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1599351431613-18ef1fdd27e1?w=400&h=400&fit=crop" alt="Styling">
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=400&h=400&fit=crop" alt="Grooming">
+        <div class="gallery-overlay"><span>View</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-header">
+      <h2>Client Reviews</h2>
+      <p>What our customers say about us</p>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-icon">"</div>
+      <p class="testimonial-text">Best barbershop in town! The attention to detail is incredible. My haircut always gets compliments. The hot towel shave is a must-try experience.</p>
+      <div class="testimonial-author">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Client" class="author-img">
+        <div class="author-info">
+          <h4>Rahul Verma</h4>
+          <p>Regular Client</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-content">
+      <h2>Ready for a New Look?</h2>
+      <p>Book your appointment today and experience premium grooming</p>
+      <button class="btn-primary">Book Now</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <a href="#" class="logo">
+        <div class="logo-icon">💈</div>
+        <span class="logo-text">Quest Men</span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Privacy</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Quest Men Salon. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
